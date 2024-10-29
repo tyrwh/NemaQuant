@@ -5,7 +5,7 @@ This tool was developed in tandem by Breeding Insight, a USDA-funded initiative 
 
 Please direct any questions to Tyr Wiesner-Hanks ([tw372@cornell.edu](mailto:tw372@cornell.edu))
 
-To get started, download or clone this directory using `git clone`.
+To get started, download this repository or clone it using `git clone`.
 
 ## Setup
 This code is designed to run from within a [Conda](https://anaconda.org/anaconda/conda) environment. We strongly recommend using [mamba](https://mamba.readthedocs.io/), a much faster implementation of the command-line `conda` tool. All `mamba` commands have the same structure and arguments as the relevant `conda` commands.
@@ -28,19 +28,34 @@ To install and set up `mamba`:
 
 ## RUNNING THE PIPELINE
 Each time you run the pipeline, you will need to activate the `mamba` environment from your command-line environment:
+
 `mamba activate nemasis`
+
 
 Once the environment is activated, you are ready to run the script. To list the potential commands:
 
 `python nemasis.py -h`
 
+
 Nemasis can analyze a single image, a directory of images, or a directory output by microscopy software with subdirectories of format `XY01`, `XY02`, etc. Images must of format .jpg, .jpeg, .tif, .tiff, or .png (case insensitive).
 
-`python ./berryportraits.py -i sample_images/pmer_37.tif`
-`python ./berryportraits.py -i sample_images/`
 
-When analyzing a directory, the images names and number of eggs in each image will be collected into a .csv with a name automatically drawn from the keyfile or directory name. To specify an output file name, use the `-o` flag:
-`python ./berryportraits.py -i sample_images/ -o test_output.csv`
+`python ./nemasis.py -i sample_images/pmer_37.tif`
+
+`python ./nemasis.py -i sample_images/`
+
+
+The simplest way to check how Nemasis is performing on your images is to save and inspect annotated output images. It is good practice to save this output and inspect it regularly. You can save this output by specifying a destination with the `-a` flag:
+
+`python ./nemasis.py -i sample_images/ -a sample_annotations/`
+
+The weights for the deep learning model used by Nemasis are stored in `weights.pt`. This makes it simpler to use Nemasis with updated models after adding new training data to improve it, or to compare multiple models to see how they perform on your images.
+
+To use alternate weights, use the `-w` flag:
+
+`python nemasis.py -i sample_images/ -w new_weights.pt`
+
+
 
 ## QUESTIONS/COMMENTS  
 Please address all questions to Tyr Wiesner-Hanks ([tw372@cornell.edu](mailto:tw372@cornell.edu))
