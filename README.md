@@ -1,8 +1,47 @@
 # Nemasis
-Machine learning tool for detecting and counting nematode eggs from microscopy images.
+Machine learning tool for detecting and counting nematode eggs from microscopy images, built as a simple standalone python script.
 
-This tool was developed in tandem by Breeding Insight, a USDA-funded initiative based at Cornell University, and the USDA-ARS sweetpotato breeding program.
+This tool was developed in tandem by Breeding Insight, a USDA-funded initiative based at Cornell University, and the USDA-ARS sweetpotato breeding program. Details on the nematode experiments from which images were drawn, the imaging process, annotation of the eggs, model training, and model validation will be described in a forthcoming publication.
 
 Please direct any questions to Tyr Wiesner-Hanks ([tw372@cornell.edu](mailto:tw372@cornell.edu))
 
-# RUNNING THE TOOL
+To get started, download or clone this directory using `git clone`.
+
+## Setup
+This code is designed to run from within a [Conda](https://anaconda.org/anaconda/conda) environment. We strongly recommend using [mamba](https://mamba.readthedocs.io/), a much faster implementation of the command-line `conda` tool. All `mamba` commands have the same structure and arguments as the relevant `conda` commands.
+
+To install and set up `mamba`:
+1. Download the appropriate installer and complete the installation process for your system
+2. Open the terminal and confirm that mamba is installed with `mamba -h`
+3. Create a new mamba environment from the YAML file:
+   
+`mamba env create -f mamba_env_nemasis.yml`
+
+4. Try activating the environment:
+
+`mamba activate nemasis`
+
+6. Run the script using the instructions below. When finished, you can simply close out of the terminal or deactivate the environment:
+
+`mamba deactivate`
+
+
+## RUNNING THE PIPELINE
+Each time you run the pipeline, you will need to activate the `mamba` environment from your command-line environment:
+`mamba activate nemasis`
+
+Once the environment is activated, you are ready to run the script. To list the potential commands:
+
+`python nemasis.py -h`
+
+Nemasis can analyze a single image, a directory of images, or a directory output by microscopy software with subdirectories of format `XY01`, `XY02`, etc. Images must of format .jpg, .jpeg, .tif, .tiff, or .png (case insensitive).
+
+`python ./berryportraits.py -i sample_images/pmer_37.tif`
+`python ./berryportraits.py -i sample_images/`
+
+When analyzing a directory, the images names and number of eggs in each image will be collected into a .csv with a name automatically drawn from the keyfile or directory name. To specify an output file name, use the `-o` flag:
+`python ./berryportraits.py -i sample_images/ -o test_output.csv`
+
+## QUESTIONS/COMMENTS  
+Please address all questions to Tyr Wiesner-Hanks ([tw372@cornell.edu](mailto:tw372@cornell.edu))
+
