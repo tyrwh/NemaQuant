@@ -5,9 +5,9 @@ This tool was developed in tandem by Breeding Insight, a USDA-funded initiative 
 
 Please direct any questions to Tyr Wiesner-Hanks ([tw372@cornell.edu](mailto:tw372@cornell.edu))
 
-To get started, download this repository under the `CODE` dropdown at top right or clone it using `git clone`.
+To get started, download this repository under the `< > CODE` dropdown at top right or clone it using `git clone`.
 
-## Setup
+## SETUP
 This code is designed to run from within a [Conda](https://anaconda.org/anaconda/conda) environment. We strongly recommend using [mamba](https://mamba.readthedocs.io/), a much faster implementation of the command-line `conda` tool. All `mamba` commands have the same structure and arguments as the relevant `conda` commands.
 
 To install and set up `mamba`:
@@ -49,13 +49,13 @@ The simplest way to check how Nemasis is performing on your images is to save an
 
 `python ./nemasis.py -i sample_images/ -a sample_annotations/`
 
-The weights for the deep learning model used by Nemasis are stored in `weights.pt`. This makes it simpler to use Nemasis with updated models after adding new training data to improve it, or to compare multiple models to see how they perform on your images.
-
-To use alternate weights, use the `-w` flag:
+The weights for the deep learning model used by Nemasis are stored in `weights.pt`, which the tool will use by default. You can specify your own weights with the `-w` flag:
 
 `python nemasis.py -i sample_images/ -w new_weights.pt`
 
+This makes it fairly simple to update your model with new annotation data or to compare multiple models on a single dataset.
 
+*Note: The new model weights must specify a valid YOLO model, as this tool relies on the `ultralytics` library for the core steps. The target object class name must be `egg`, though this could be easily modified if you're comfortable with python*
 
 ## QUESTIONS/COMMENTS  
 Please address all questions to Tyr Wiesner-Hanks ([tw372@cornell.edu](mailto:tw372@cornell.edu))
