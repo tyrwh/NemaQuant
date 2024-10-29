@@ -5,7 +5,7 @@ This tool was developed in tandem by Breeding Insight, a USDA-funded initiative 
 
 Please direct any questions to Tyr Wiesner-Hanks ([tw372@cornell.edu](mailto:tw372@cornell.edu))
 
-To get started, download this repository or clone it using `git clone`.
+To get started, download this repository under the `CODE` dropdown at top right or clone it using `git clone`.
 
 ## Setup
 This code is designed to run from within a [Conda](https://anaconda.org/anaconda/conda) environment. We strongly recommend using [mamba](https://mamba.readthedocs.io/), a much faster implementation of the command-line `conda` tool. All `mamba` commands have the same structure and arguments as the relevant `conda` commands.
