@@ -14,11 +14,11 @@ import re
 def options():
     parser = argparse.ArgumentParser(description="Nematode egg image processing with YOLOv8 model.")
     parser.add_argument("-i", "--img", help="Target image directory or image (REQUIRED)", required=True)
-    parser.add_argument('-w', '--weights', help='Weights file for use with YOLOv8 model (REQUIRED)', required=True)
+    parser.add_argument('-w', '--weights', help='Weights file for use with YOLOv8 model')
     parser.add_argument("-o","--output", help="Name of results file. If no file is specified, one will be created from the key file name")
     parser.add_argument("-k", "--key", help="CSV key file to use as output template. If no file is specified, will look for one in target directory. Not used in single-image mode")
     parser.add_argument("-a","--annotated", help="Directory to save annotated image files", required=False)
-    parser.add_argument("--conf", help="Confidence cutoff", default=0.6)
+    parser.add_argument("--conf", help="Confidence cutoff (default = 0.6)", default=0.6)
     args = parser.parse_args()
     return args
 
@@ -37,6 +37,15 @@ def check_args():
         args.img_mode = 'dir'
     else:
         raise Exception('Target %s does not appear to be a file or directory.' % args.img)
+
+    # if no weights file, try using the default weights.pt
+    if not args.weights:
+        script_dir = Path(__file__).parent
+        default_weights = script_dir / 'weights.pt'
+        if default_weights.exists():
+            args.weights = str(default_weights)
+        else:
+            raise Exception('No weights file specified and default weights.pt not found in script directory')
 
     # check if subdirectories of format XY00/ exist or if we're running on just a dir of images
     if args.img_mode == 'dir':
