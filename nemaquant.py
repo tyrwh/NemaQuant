@@ -148,7 +148,7 @@ def main():
     # single-image mode
     if args.img_mode == 'file':
         img = cv2.imread(str(args.imgpath))
-        results = model.predict(img, imgsz = 1440, verbose=False, conf=args.conf)
+        results = model.predict(img, imgsz = 1440, max_det=1000, verbose=False, conf=args.conf)
         result = results[0]
         box_classes = [result.names[int(x)] for x in result.boxes.cls]
         # NOTE - filtering by class is not necessary, but would make this easier to extend to multi-class models
